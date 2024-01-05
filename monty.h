@@ -1,24 +1,21 @@
-#ifndef MONTY
-#define MONTY
-#include <stdio.h>
-#include <ctype.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include <stddef.h>
-#include <stdarg.h>
-#include <unistd.h>
+#ifndef MONTY_H
+#define MONTY_H
 
-extern char *value;
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <string.h>
+#include <ctype.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
  * @prev: points to the previous element of the stack (or queue)
  * @next: points to the next element of the stack (or queue)
- *
- * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO
+ *Description: doubly linked list node structure
+ * for stack, queues, LIFO, FIFO Holberton project
  */
 typedef struct stack_s
 {
@@ -31,9 +28,8 @@ typedef struct stack_s
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
  * @f: function to handle the opcode
- *
- * Description: opcode and its function
- * for stack, queues, LIFO, FIFO
+ *Description: opcode and its function
+ * for stack, queues, LIFO, FIFO Holberton project
  */
 typedef struct instruction_s
 {
@@ -41,15 +37,22 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void freedom(char *buffer, stack_t **stack);
-void (*op_func(char *buff))(stack_t **stack, unsigned int line_number);
-char **split(char *buffer, char *delim);
-int free_string_list(char **list);
-void _push(stack_t **stack, unsigned int line_number);
-void _pall(stack_t **stack, unsigned int line_number);
-void _pint(stack_t **stack, unsigned int line_number);
-void _pop(stack_t **stack, unsigned int line_number);
-void _swap(stack_t **stack, unsigned int line_number);
-void _add(stack_t **stack, unsigned int line_number);
-void _nop(stack_t **stack, unsigned int line_number);
+/**
+ * struct va_arg - hold variables
+ * @streame: file the connects to the file
+ * @line_str: line of text read from stream
+ */
+typedef struct va_arg
+{
+	FILE *stream;
+	char *line_str;
+} va_argtmp;
+
+extern va_argtmp *arguments;
+
+void initialization_arguments();
+void malloc_memory_failed();
+void free_arguments();
+void get_str_failed(char *filename);
+void get_str(char *filename);
 #endif
